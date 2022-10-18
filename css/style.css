@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+
+    height: 100vh;
+
+    background-color: #EEF9BF;
+    font-family: 'Roboto', sans-serif;
+}
+
+h1 {
+    font-size: 56px;
+    font-weight: 700;
+    color: #75B79E;
+    background-color: coral;
+}
+
+.mesa {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    width: 80%;
+    height: 400px;
+
+    background-color: blue;
+}
+
+.card {
+    display: flex;
+    width: 117px;
+    height: 146px;
+
+    position: relative;
+
+    transition: all 400ms ease;
+    transform-style: preserve-3d;
+
+    background-color: rebeccapurple;
+}
+
+.back, .front {
+    display: flex;
+
+    position: absolute;
+
+    width: 100%;
+    height: 100%;
+    background-size: 85%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.back {
+    border: 1px solid #99CEA8;
+    border-radius: 5px;
+
+    backface-visibility: hidden;
+
+    background-color: #A7E9AF;
+    background-image: url(../img/back.png);
+
+
+}
+
+.front {
+    transform: rotateY(180deg);
+
+    border-radius: 5px;
+    background-image: url(../img/bobrossparrot.gif);
+
+    background-color: rgb(241, 161, 217);
+}
+
+/*------------------------Virando as cartas--------------------------------*/
+.virado {
+    transform: rotateY(180deg);
+}
