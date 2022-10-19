@@ -8,44 +8,42 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-around;
-
-    height: 100vh;
 
     background-color: #EEF9BF;
     font-family: 'Roboto', sans-serif;
 }
 
 h1 {
+    margin: 60px 0;
     font-size: 56px;
     font-weight: 700;
     color: #75B79E;
-    background-color: coral;
 }
 
 .mesa {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    width: 80%;
-    height: 400px;
+    justify-content: center;
+    align-items: center;
 
-    background-color: blue;
+    gap: 5%;
+
+    margin-bottom: 60px;
 }
 
 .card {
     display: flex;
     width: 117px;
-    height: 146px;
+    aspect-ratio: 3/4;
 
     position: relative;
 
     transition: all 400ms ease;
     transform-style: preserve-3d;
 
-    background-color: rebeccapurple;
 }
 
-.back, .front {
+.back,
+.front {
     display: flex;
 
     position: absolute;
@@ -65,15 +63,12 @@ h1 {
 
     background-color: #A7E9AF;
     background-image: url(../img/back.png);
-
-
 }
 
 .front {
     transform: rotateY(180deg);
 
     border-radius: 5px;
-    background-image: url(../img/bobrossparrot.gif);
 
     background-color: rgb(241, 161, 217);
 }
@@ -81,4 +76,30 @@ h1 {
 /*------------------------Virando as cartas--------------------------------*/
 .virado {
     transform: rotateY(180deg);
+}
+
+/*---------------------------Layout Mobile-----------------------------------*/
+@media (max-width: 1050px){
+    h1{
+        font-size: 36px;
+        text-align: center;
+        width: 70%;
+    }
+}
+@media (max-width: 650px) {
+    h1 {
+        width: 65%;
+    }
+
+    .mesa {
+        display: flex;
+        flex-direction: column;
+        width: 35%;
+        gap: 15px;
+
+    }
+
+    body {
+        justify-content: center;
+    }
 }
