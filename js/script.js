@@ -1,10 +1,12 @@
 const mesa = document.querySelector('.mesa');
+const relogio = document.querySelector('.relogio');
 
 let quantCartas = 0;
 let primeiraCarta = '';
 let segundaCarta = '';
 let numeroJogadas = 0;
 let pontos = 0;
+let tempo;
 
 const parrots = [
     'bobrossparrot',
@@ -15,6 +17,12 @@ const parrots = [
     'tripletsparrot',
     'unicornparrot'
 ]
+
+//Contagem do relogio
+setInterval(() => {
+    relogio.innerHTML = +relogio.innerHTML + 1;
+    tempo = relogio.innerHTML;
+}, 1000)
 
 //Revela a carta (Lógica principal do jogo onde as cartas são comparadas)
 const mostrarCarta = ({ target }) => {
@@ -61,7 +69,7 @@ const mostrarCarta = ({ target }) => {
                     e.removeEventListener('click', mostrarCarta);
                 })
 
-                alert(`Você ganhou em ${numeroJogadas} jogadas`);
+                alert(`Você ganhou em ${numeroJogadas} jogadas e ${tempo} segundos`);
                 let resp = prompt("Deseja jogar novamente? ('sim' ou 'não')")
                 while(resp != 'sim' && resp != 'não'){
                     resp = prompt("Responda apenas com 'sim' ou 'não'");
