@@ -4,6 +4,7 @@ let quantCartas = 0;
 let primeiraCarta = '';
 let segundaCarta = '';
 let numeroJogadas = 0;
+let pontos = 0;
 
 const parrots = [
     'bobrossparrot',
@@ -15,24 +16,18 @@ const parrots = [
     'unicornparrot'
 ]
 
-//Função para criar elemento dinamicamente
-const criaElemento = (tag, classe) => {
-    let elem = document.createElement(tag);
-    elem.classList.add(classe);
-
-    return elem;
-}
-
-//Revela a carta
+//Revela a carta (Lógica principal do jogo onde as cartas são comparadas)
 const mostrarCarta = ({ target }) => {
     target.parentNode.classList.add('virado');
     if (primeiraCarta == '') {
         primeiraCarta = target.parentNode.id;
-        console.log(primeiraCarta)
+
     }
     else {
+        numeroJogadas++;
+
         segundaCarta = target.parentNode.id;
-        console.log(segundaCarta);
+
 
         const cards = document.querySelectorAll('.card');
         const selecao = document.querySelectorAll('.virado')
@@ -42,12 +37,12 @@ const mostrarCarta = ({ target }) => {
 
         setTimeout(() => {
             if (primeiraCarta == segundaCarta) {
-                console.log('é igual');
                 selecao.forEach(e => {
                     e.classList.add('disabled');
                 })
                 primeiraCarta = '';
                 segundaCarta = '';
+                pontos++;
             }
             else {
                 selecao.forEach(e => {
@@ -59,19 +54,43 @@ const mostrarCarta = ({ target }) => {
                 segundaCarta = '';
             }
             cards.forEach(e => {
-
                 e.addEventListener('click', mostrarCarta);
-
             })
+            if (pontos == quantCartas / 2) {
+                cards.forEach(e => {
+                    e.removeEventListener('click', mostrarCarta);
+                })
 
-        }, 1000)
+                alert(`Você ganhou em ${numeroJogadas} jogadas`);
+                let resp = prompt("Deseja jogar novamente? ('sim' ou 'não')")
+                while(resp != 'sim' && resp != 'não'){
+                    resp = prompt("Responda apenas com 'sim' ou 'não'");
+                }
+                if (resp == 'sim') {
+                    document.location.reload();
+                }
+                else {
+                    if (resp == 'não') {
+                        return
+                    }
+                }
+            }
+
+        }, 700)
 
         const desabilitadas = document.querySelectorAll('.disabled')
         desabilitadas.forEach(e => {
             e.removeEventListener('click', mostrarCarta);
         })
     }
+}
 
+//Função para criar elemento dinamicamente
+const criaElemento = (tag, classe) => {
+    let elem = document.createElement(tag);
+    elem.classList.add(classe);
+
+    return elem;
 }
 
 //Função para criar cartas dinamicamente
