@@ -1,7 +1,9 @@
-const cards = document.querySelectorAll('.card');
 const mesa = document.querySelector('.mesa');
 
 let quantCartas = 0;
+let primeiraCarta = '';
+let segundaCarta = '';
+let numeroJogadas = 0;
 
 const parrots = [
     'bobrossparrot',
@@ -24,6 +26,52 @@ const criaElemento = (tag, classe) => {
 //Revela a carta
 const mostrarCarta = ({ target }) => {
     target.parentNode.classList.add('virado');
+    if (primeiraCarta == '') {
+        primeiraCarta = target.parentNode.id;
+        console.log(primeiraCarta)
+    }
+    else {
+        segundaCarta = target.parentNode.id;
+        console.log(segundaCarta);
+
+        const cards = document.querySelectorAll('.card');
+        const selecao = document.querySelectorAll('.virado')
+        cards.forEach(e => {
+            e.removeEventListener('click', mostrarCarta);
+        })
+
+        setTimeout(() => {
+            if (primeiraCarta == segundaCarta) {
+                console.log('é igual');
+                selecao.forEach(e => {
+                    e.classList.add('disabled');
+                })
+                primeiraCarta = '';
+                segundaCarta = '';
+            }
+            else {
+                selecao.forEach(e => {
+                    if (!e.classList.contains('disabled')) {
+                        e.classList.remove('virado');
+                    }
+                })
+                primeiraCarta = '';
+                segundaCarta = '';
+            }
+            cards.forEach(e => {
+
+                e.addEventListener('click', mostrarCarta);
+
+            })
+
+        }, 1000)
+
+        const desabilitadas = document.querySelectorAll('.disabled')
+        desabilitadas.forEach(e => {
+            e.removeEventListener('click', mostrarCarta);
+        })
+    }
+
 }
 
 //Função para criar cartas dinamicamente
@@ -39,10 +87,12 @@ const criaCartas = (parrot) => {
     card.appendChild(back);
 
     card.addEventListener('click', mostrarCarta);
+    card.id = `${parrot}`
 
     return card;
 }
 
+//Função que embaralha
 function shuffleArray(arr) {
     // Loop em todos os elementos
     for (let i = arr.length - 1; i > 0; i--) {
@@ -55,7 +105,7 @@ function shuffleArray(arr) {
     return arr;
 }
 
-//Função quer inicia o jogo
+//Função que inicia o jogo
 const carregaJogo = () => {
     let selecionadas = [];
     let jogo = [];
@@ -78,10 +128,8 @@ const carregaJogo = () => {
 
 
     for (let i = 0; i < jogo.length; i++) {
-
         mesa.appendChild(criaCartas(jogo[i]));
     }
-
 
 }
 
