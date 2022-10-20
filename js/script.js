@@ -29,6 +29,7 @@ const mostrarCarta = ({ target }) => {
     target.parentNode.classList.add('virado');
     if (primeiraCarta == '') {
         primeiraCarta = target.parentNode.id;
+        numeroJogadas++;
 
     }
     else {
