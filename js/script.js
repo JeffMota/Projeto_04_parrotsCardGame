@@ -109,7 +109,7 @@ const criaCartas = (parrot) => {
     const back = criaElemento('div', 'back');
 
     //Adicionar imagem 
-    front.style.backgroundImage = `url(../img/${parrot}.gif)`
+    front.style.backgroundImage = `url(./img/${parrot}.gif)`
 
     card.appendChild(front);
     card.appendChild(back);
